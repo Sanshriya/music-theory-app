@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Topics</title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Topics</h1>
+    <ul>
+        <% topics.forEach(topic => { %>
+            <li><a href="/topics/<%= topic.id %>/1"><%= topic.name %></a></li>
+        <% }) %>
+    </ul>
+    <a href="/">Back to Home</a>
+  </body>
+</html>
