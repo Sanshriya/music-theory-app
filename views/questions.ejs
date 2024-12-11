@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Question <%= questionNumber %></title>
+</head>
+<body>
+    <h1>Question <%= questionNumber %></h1>
+
+    <% if (currentQuestion) { %>
+        <!-- Display the Question -->
+        <p><%= currentQuestion.question %></p>
+    <% } else { %>
+        <!-- Display the error message if no question is found -->
+        <p>No question found for this topic and question number.</p>
+    <% } %>
+
+    <!-- Navigation Links -->
+    <div>
+        <% if (questionNumber > 1) { %>
+            <a href="/topics/<%= topicName %>/<%= questionNumber - 1 %>">Previous Question</a>
+        <% } %>
+        <% if (currentQuestion && questionNumber < 5) { %> <!-- Assuming max 5 questions per topic -->
+            <a href="/topics/<%= topicName %>/<%= questionNumber + 1 %>">Next Question</a>
+        <% } %>
+    </div>
+
+    <a href="/topics">Back to Topics</a>
+</body>
+</html>

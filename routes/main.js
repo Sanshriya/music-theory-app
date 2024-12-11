@@ -24,6 +24,38 @@ router.get('/topics', (req, res) => {
     });
 });
 
+router.get('/topics/:topic_name/:question_number', (req, res) => {
+    const topicName = req.params.topic_name;
+    const questionNumber = parseInt(req.params.question_number, 10);
+
+    // Query to get topic ID by name
+    const sqlTopic = "SELECT id FROM topics WHERE name = ?";
+    db.query(sqlTopic, [topicName], (err, topicResult) => {
+        if (err || topicResult.length === 0) {
+            return res.send("Topic not found or error loading topic."); // Handle error for topic
+        }
+
+        const topicId = topicResult[0].id;
+
+        // Query to get the question for the topic and question number
+        const sqlQuestions = "SELECT * FROM questions WHERE topic_id = ? LIMIT ?, 1";
+        db.query(sqlQuestions, [topicId, questionNumber - 1], (errQuestions, questionResult) => {
+            if (errQuestions || questionResult.length === 0) {
+                return res.send("No question found for this topic and number."); // Handle error for question
+            }
+
+            // Render the question page
+            res.render('questions.ejs', {
+                currentQuestion: questionResult[0],
+                topicName,
+                questionNumber
+            });
+        });
+    });
+});
+
+
+
 router.get('/search', function(req, res) {
     res.render("search.ejs", shopData);
 });
