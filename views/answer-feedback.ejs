@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <title>Answer Feedback</title>
+</head>
+<body>
+    <h1>Answer Feedback</h1>
+
+    <% if (isCorrect) { %>
+        <p>Correct! Well done.</p>
+    <% } else { %>
+        <p>Incorrect. The correct answer is: <%= correctAnswer %></p>
+    <% } %>
+
+    <div>
+        <% if (questionNumber > 1) { %>
+            <a href="/topics/<%= topicName %>/<%= questionNumber - 1 %>">Previous Question</a>
+        <% } %>
+        <% if (questionNumber < 5) { %> <!-- Assuming 5 questions per topic -->
+            <a href="/topics/<%= topicName %>/<%= questionNumber + 1 %>">Next Question</a>
+        <% } %>
+    </div>    
+
+    <a href="/topics">Back to Topics</a>
+</body>
+</html>

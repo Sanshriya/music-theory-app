@@ -15,5 +15,13 @@ CREATE TABLE IF NOT EXISTS questions (
     FOREIGN KEY (topic_id) REFERENCES topics(id)
 );
 
+CREATE TABLE IF NOT EXISTS user_answers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_answer TEXT,
+    is_correct BOOLEAN,
+    question_id INT,
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
 CREATE USER IF NOT EXISTS 'app_user'@'localhost' IDENTIFIED BY 'qwertyuiop'; 
 GRANT ALL PRIVILEGES ON music_theory_app.* TO 'app_user'@'localhost';

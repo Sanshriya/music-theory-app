@@ -9,8 +9,19 @@
     <% if (currentQuestion) { %>
         <!-- Display the Question -->
         <p><%= currentQuestion.question %></p>
+
+        <!-- Form to Submit the Answer -->
+        <form action="/answer-feedback" method="POST">
+            <label for="userAnswer">Your Answer:</label>
+            <input type="text" id="userAnswer" name="userAnswer" required>
+            <input type="hidden" name="correctAnswer" value="<%= currentQuestion.answer %>">
+            <input type="hidden" name="questionId" value="<%= currentQuestion.id %>">
+            <input type="hidden" name="questionNumber" value="<%= questionNumber %>">
+            <input type="hidden" name="topicName" value="<%= topicName %>">
+            <button type="submit">Submit</button>
+        </form>
+        
     <% } else { %>
-        <!-- Display the error message if no question is found -->
         <p>No question found for this topic and question number.</p>
     <% } %>
 
@@ -19,7 +30,7 @@
         <% if (questionNumber > 1) { %>
             <a href="/topics/<%= topicName %>/<%= questionNumber - 1 %>">Previous Question</a>
         <% } %>
-        <% if (currentQuestion && questionNumber < 5) { %> <!-- Assuming max 5 questions per topic -->
+        <% if (questionNumber < 5) { %>
             <a href="/topics/<%= topicName %>/<%= questionNumber + 1 %>">Next Question</a>
         <% } %>
     </div>

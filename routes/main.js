@@ -32,7 +32,7 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
     const sqlTopic = "SELECT id FROM topics WHERE name = ?";
     db.query(sqlTopic, [topicName], (err, topicResult) => {
         if (err || topicResult.length === 0) {
-            return res.send("Topic not found or error loading topic."); // Handle error for topic
+            res.send("Topic not found or error loading topic."); // Handle error for topic
         }
 
         const topicId = topicResult[0].id;
@@ -41,7 +41,7 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
         const sqlQuestions = "SELECT * FROM questions WHERE topic_id = ? LIMIT ?, 1";
         db.query(sqlQuestions, [topicId, questionNumber - 1], (errQuestions, questionResult) => {
             if (errQuestions || questionResult.length === 0) {
-                return res.send("No question found for this topic and number."); // Handle error for question
+                res.send("No question found for this topic and number."); // Handle error for question
             }
 
             // Render the question page
@@ -54,7 +54,39 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
     });
 });
 
+router.post('/answer-feedback', (req, res) => {
+    const { userAnswer, correctAnswer, questionId, questionNumber, topicName } = req.body;
 
+    // Normalisation function: remove non-alphanumeric characters and lowercase the answer
+    const normaliseAnswer = (answer) =>
+        answer
+            .toLowerCase() // Convert to lowercase
+            .replace(/[^a-z0-9]/g, '');  // Remove anything that's not a letter or number
+
+    // Normalise the answers
+    const normalisedUserAnswer = normaliseAnswer(userAnswer);
+    const normalisedCorrectAnswer = normaliseAnswer(correctAnswer);
+
+    // Check if the normalised answers are equal
+    const isCorrect = normalisedUserAnswer === normalisedCorrectAnswer;
+
+    // Insert the user's answer into the database
+    const sqlInsert = "INSERT INTO user_answers (user_answer, is_correct, question_id) VALUES (?, ?, ?)";
+    db.query(sqlInsert, [userAnswer, isCorrect, questionId], (err) => {
+        if (err) {
+            console.error("Database Error:", err);
+            return res.send("Error saving your answer.");
+        }
+
+        res.render('answer-feedback.ejs', {
+            isCorrect,
+            correctAnswer,
+            userAnswer,
+            questionNumber: parseInt(questionNumber, 10),
+            topicName
+        });
+    });
+});
 
 router.get('/search', function(req, res) {
     res.render("search.ejs", shopData);
