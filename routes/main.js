@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 // Define our data
-var shopData = { shopName: "In Tune with Music Theory" };
+var appData = { appName: "In Tune with Music Theory" };
 
 // Handle our routes
 router.get('/', function(req, res) {
-    res.render('index.ejs', shopData);
+    res.render('index.ejs', appData);
 });
 
 router.get('/about', function(req, res) {
-    res.render('about.ejs', shopData);
+    res.render('about.ejs', appData);
 });
 
 router.get('/topics', (req, res) => {
@@ -32,7 +32,7 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
     const sqlTopic = "SELECT id FROM topics WHERE name = ?";
     db.query(sqlTopic, [topicName], (err, topicResult) => {
         if (err || topicResult.length === 0) {
-            res.send("Topic not found or error loading topic."); // Handle error for topic
+            res.send("Topic not found or error loading topic.");
         }
 
         const topicId = topicResult[0].id;
@@ -41,7 +41,7 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
         const sqlQuestions = "SELECT * FROM questions WHERE topic_id = ? LIMIT ?, 1";
         db.query(sqlQuestions, [topicId, questionNumber - 1], (errQuestions, questionResult) => {
             if (errQuestions || questionResult.length === 0) {
-                res.send("No question found for this topic and number."); // Handle error for question
+                res.send("No question found for this topic and number.");
             }
 
             // Render the question page
@@ -60,8 +60,8 @@ router.post('/answer-feedback', (req, res) => {
     // Normalisation function: remove non-alphanumeric characters and lowercase the answer
     const normaliseAnswer = (answer) =>
         answer
-            .toLowerCase() // Convert to lowercase
-            .replace(/[^a-z0-9]/g, '');  // Remove anything that's not a letter or number
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, ''); // Remove anything that's not a letter or number
 
     // Normalise the answers
     const normalisedUserAnswer = normaliseAnswer(userAnswer);
@@ -75,7 +75,7 @@ router.post('/answer-feedback', (req, res) => {
     db.query(sqlInsert, [userAnswer, isCorrect, questionId], (err) => {
         if (err) {
             console.error("Database Error:", err);
-            return res.send("Error saving your answer.");
+            res.send("Error saving your answer.");
         }
 
         res.render('answer-feedback.ejs', {
@@ -89,16 +89,34 @@ router.post('/answer-feedback', (req, res) => {
 });
 
 router.get('/search', function(req, res) {
-    res.render("search.ejs", shopData);
+    res.render("search.ejs", appData);
 });
 
 router.get('/search-result', function(req, res) {
-    // Searching in the database
-    res.send("You searched for: " + req.query.keyword);
+    const keyword = req.query.keyword;
+    const searchQuery = `%${keyword}%`; // Wrap the search term with '%' for LIKE search
+
+    // Search both question and answer columns for the keyword
+    const sqlQuery = `
+        SELECT * FROM questions
+        WHERE question LIKE ? OR answer LIKE ?`;
+
+    db.query(sqlQuery, [searchQuery, searchQuery], (err, results) => {
+        if (err) {
+            console.error("Error searching questions:", err);
+            res.send("Error during search.");
+        }
+
+        // Render the search results
+        res.render('search-result.ejs', {
+            keyword,
+            results,
+        });
+    });
 });
 
 router.get('/register', function(req, res) {
-    res.render('register.ejs', shopData);
+    res.render('register.ejs', appData);
 });
 
 router.post('/registered', function(req, res) {
@@ -115,7 +133,7 @@ router.get('/list', function(req, res) {
         if (err) {
             res.redirect('./');
         }
-        let newData = Object.assign({}, shopData, {availableBooks:result});
+        let newData = Object.assign({}, appData, {availableBooks:result});
           console.log(newData)
           res.render("list.ejs", newData)
     });

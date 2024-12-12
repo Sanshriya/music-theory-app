@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>Search Results for <%= keyword %></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+</head>
+<body>
+    <h1>Search Results for "<%= keyword %>"</h1>
+
+    <% if (results.length === 0) { %>
+        <p>No results found.</p>
+    <% } else { %>
+        <ul>
+            <% results.forEach(result => { %>
+                <li>
+                    <strong>Question:</strong> <%= result.question %><br>
+                    <strong>Answer:</strong> <%= result.answer %>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

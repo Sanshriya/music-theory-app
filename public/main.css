@@ -1,43 +1,187 @@
+/* General Body Styling */
+body {
+  font-family: 'Verdana', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fdf6fb; /* Soft pastel pink */
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre content horizontally */
+  justify-content: center; /* Centre content vertically */
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Main Container */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff; /* White content background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  gap: 20px; /* Add space between child elements */
+}
+
+/* Header Styling */
+h1, h2 {
+  text-align: center;
+  color: #e22b80;
+  margin-bottom: 20px;
+}
+
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: darkcyan;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 h2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: cadetblue;
+  font-size: 2rem;
 }
 
-p,li {
-    font-family: Arial, Helvetica, sans-serif;
+/* Paragraph Styling */
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  margin: 15px 0;
 }
 
-a:link {
-    color: orangered;
-    text-decoration: none;
-    padding:5px;
-  }
-  
-  /* visited link */
-  a:visited {
-    color: tomato;
-    text-decoration: none;
-    padding:5px;
-  }
-  
-  /* mouse over link */
-  a:hover {
-    color: white;
-    text-decoration: none;
-    background-color: orangered;
-    padding:5px;
-  }
-  
-  /* selected link */
-  a:active {
-    color: blue;
-    text-decoration: none;
-    padding:5px;
-  }
+/* Lists */
+ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Stack list items vertically */
+  gap: 10px;
+}
+
+li {
+  background-color: #f4e1f2; /* Light pastel purple */
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: #d8bfea; /* Slightly darker purple */
+}
+
+/* Links */
+a {
+  color: #8a2be2; /* Purple links */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+a:hover {
+  color: white;
+  background-color: #8a2be2;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column; /* Stack form inputs vertically */
+  align-items: center;
+  gap: 15px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1.2rem;
+  width: 80%;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #ff7f50; /* Coral button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #e67341; /* Darker coral */
+}
+
+/* Feedback Messages */
+.feedback {
+  text-align: center;
+  padding: 15px;
+  margin: 20px 0;
+  font-size: 1.3rem;
+  border-radius: 10px;
+}
+
+.feedback.correct {
+  background-color: #c8f7c5; /* Light green */
+  color: #228b22; /* Dark green */
+}
+
+.feedback.incorrect {
+  background-color: #f9c2c3; /* Light pink */
+  color: #d8000c; /* Dark red */
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between buttons */
+  margin-top: 30px;
+}
+
+/* Individual Buttons */
+.nav-buttons .home-button {
+  background-color: #00796b; /* Teal for Back to Home */
+  color: white;
+  padding: 15px 20px; /* Larger padding for bigger buttons */
+  font-size: 1.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons .home-button:hover {
+  background-color: #005f56; /* Darker teal */
+}
+
+.nav-buttons .topics-button {
+  background-color: #ff7f50; /* Coral for Back to Topics */
+  color: white;
+  padding: 15px 20px; /* Larger padding for bigger buttons */
+  font-size: 1.2rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons .topics-button:hover {
+  background-color: #e67341; /* Darker coral */
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 1rem;
+  background-color: #f4e1f2; /* Light pastel purple */
+  color: #333;
+  border-top: 2px solid #ddd;
+}
