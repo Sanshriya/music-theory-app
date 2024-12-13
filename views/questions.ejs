@@ -8,10 +8,10 @@
     <h1>Question <%= questionNumber %></h1>
 
     <% if (currentQuestion) { %>
-        <!-- Display the Question -->
+        <!-- Display the question -->
         <p><%= currentQuestion.question %></p>
 
-        <!-- Form to Submit the Answer -->
+        <!-- Form to submit answer -->
         <form action="/answer-feedback" method="POST">
             <label for="userAnswer">Your Answer:</label>
             <input type="text" id="userAnswer" name="userAnswer" required>
@@ -26,7 +26,7 @@
         <p>No question found for this topic and question number.</p>
     <% } %>
 
-    <!-- Navigation Links -->
+    <!-- Navigation links -->
     <div>
         <% if (questionNumber > 1) { %>
             <a href="/topics/<%= topicName %>/<%= questionNumber - 1 %>">Previous Question</a>

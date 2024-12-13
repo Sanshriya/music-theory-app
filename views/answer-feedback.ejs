@@ -17,7 +17,7 @@
         <% if (questionNumber > 1) { %>
             <a href="/topics/<%= topicName %>/<%= questionNumber - 1 %>">Previous Question</a>
         <% } %>
-        <% if (questionNumber < 5) { %> <!-- Assuming 5 questions per topic -->
+        <% if (questionNumber < 5) { %>
             <a href="/topics/<%= topicName %>/<%= questionNumber + 1 %>">Next Question</a>
         <% } %>
     </div>    

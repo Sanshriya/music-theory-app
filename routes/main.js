@@ -115,29 +115,5 @@ router.get('/search-result', function(req, res) {
     });
 });
 
-router.get('/register', function(req, res) {
-    res.render('register.ejs', appData);
-});
-
-router.post('/registered', function(req, res) {
-    // Saving data in database
-    res.send(' Hello ' + req.body.first + ' ' + req.body.last + 
-             ' you are now registered!  We will send an email to you at ' + req.body.email);
-});
-
-// Define a new route to list topics from the database
-router.get('/list', function(req, res) {
-    let sqlquery = "SELECT * FROM topics"; // Query database to get all the topics
-    // Execute SQL query
-    db.query(sqlquery, (err, result) => {
-        if (err) {
-            res.redirect('./');
-        }
-        let newData = Object.assign({}, appData, {availableBooks:result});
-          console.log(newData)
-          res.render("list.ejs", newData)
-    });
-});
-
 // Export the router object so index.js can access it
 module.exports = router;

@@ -3,13 +3,13 @@ body {
   font-family: 'Verdana', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fdf6fb; /* Soft pastel pink */
+  background-color: #fdf6fb;
   color: #333;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre content horizontally */
-  justify-content: center; /* Centre content vertically */
-  min-height: 100vh; /* Full viewport height */
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 /* Main Container */
@@ -17,12 +17,12 @@ body {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background: #ffffff; /* White content background */
+  background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Stack content vertically */
-  gap: 20px; /* Add space between child elements */
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Header Styling */
@@ -51,16 +51,16 @@ p {
 
 /* Lists */
 ul {
-  list-style: none; /* Remove default bullet points */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column; /* Stack list items vertically */
+  flex-direction: column;
   gap: 10px;
 }
 
 li {
-  background-color: #f4e1f2; /* Light pastel purple */
+  background-color: #f4e1f2;
   padding: 15px;
   border-radius: 8px;
   font-size: 1.2rem;
@@ -69,12 +69,12 @@ li {
 }
 
 li:hover {
-  background-color: #d8bfea; /* Slightly darker purple */
+  background-color: #d8bfea;
 }
 
 /* Links */
 a {
-  color: #8a2be2; /* Purple links */
+  color: #8a2be2;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease, background-color 0.3s ease;
@@ -90,7 +90,7 @@ a:hover {
 /* Form Styling */
 form {
   display: flex;
-  flex-direction: column; /* Stack form inputs vertically */
+  flex-direction: column;
   align-items: center;
   gap: 15px;
 }
@@ -107,7 +107,7 @@ input[type="text"] {
 input[type="submit"] {
   padding: 10px 20px;
   font-size: 1.2rem;
-  background-color: #ff7f50; /* Coral button */
+  background-color: #ff7f50;
   color: white;
   border: none;
   border-radius: 8px;
@@ -116,7 +116,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #e67341; /* Darker coral */
+  background-color: #e67341;
 }
 
 /* Feedback Messages */
@@ -129,28 +129,28 @@ input[type="submit"]:hover {
 }
 
 .feedback.correct {
-  background-color: #c8f7c5; /* Light green */
-  color: #228b22; /* Dark green */
+  background-color: #c8f7c5;
+  color: #228b22;
 }
 
 .feedback.incorrect {
-  background-color: #f9c2c3; /* Light pink */
-  color: #d8000c; /* Dark red */
+  background-color: #f9c2c3;
+  color: #d8000c;
 }
 
 /* Navigation Buttons */
 .nav-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Space between buttons */
+  gap: 20px;
   margin-top: 30px;
 }
 
 /* Individual Buttons */
 .nav-buttons .home-button {
-  background-color: #00796b; /* Teal for Back to Home */
+  background-color: #00796b;
   color: white;
-  padding: 15px 20px; /* Larger padding for bigger buttons */
+  padding: 15px 20px;
   font-size: 1.2rem;
   border-radius: 10px;
   text-decoration: none;
@@ -158,13 +158,13 @@ input[type="submit"]:hover {
 }
 
 .nav-buttons .home-button:hover {
-  background-color: #005f56; /* Darker teal */
+  background-color: #005f56;
 }
 
 .nav-buttons .topics-button {
-  background-color: #ff7f50; /* Coral for Back to Topics */
+  background-color: #ff7f50;
   color: white;
-  padding: 15px 20px; /* Larger padding for bigger buttons */
+  padding: 15px 20px;
   font-size: 1.2rem;
   border-radius: 10px;
   text-decoration: none;
@@ -172,7 +172,7 @@ input[type="submit"]:hover {
 }
 
 .nav-buttons .topics-button:hover {
-  background-color: #e67341; /* Darker coral */
+  background-color: #e67341;
 }
 
 /* Footer Styling */
@@ -181,7 +181,7 @@ footer {
   padding: 15px;
   margin-top: 40px;
   font-size: 1rem;
-  background-color: #f4e1f2; /* Light pastel purple */
+  background-color: #f4e1f2;
   color: #333;
   border-top: 2px solid #ddd;
 }
