@@ -112,19 +112,47 @@ Run the following commands:
     exit
     nvm install 16
 
-4. Install git.
+4. Install MySQL:
+
+    sudo apt-get install mysql-server
+
+5. Start the MySQL shell as the root user:
+
+    sudo mysql 
+
+   Then enter the root password for MySQL.
+
+6. Run the following SQL commands to create the database and tables:  
+  
+    ```sql
+    SOURCE /path/to/your/create_db.sql;  
+    SOURCE /path/to/your/insert_test_data.sql; 
+
+   Replace /path/to/your/ with the actual path to where the files are located on your machine.
+
+   If the .sql files are in the current directory, you can just use the file names:
+
+   ```sql
+   SOURCE create_db.sql;  
+   SOURCE insert_test_data.sql; 
+
+7. Exit MySQL:
+
+    exit
+
+8. Install git:
 
     sudo apt install git
 
-5. Pull the app code to the virtual machine. This will create a file called 'music-theory-app'.
+9. Pull the app code to the virtual machine. This will create a file called 'music-theory-app'.
 
     git clone https://github.com/Sanshriya/music-theory-app
 
-6. Change into the music-theory-app folder using the Linux cd command:
+10. Change into the music-theory-app folder using the Linux cd command:
 
     cd music-theory-app
 
-7. Run the application!
+11. Run the application!
 
     node index.js
 
