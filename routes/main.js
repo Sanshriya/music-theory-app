@@ -63,12 +63,19 @@ router.post('/answer-feedback', (req, res) => {
             .toLowerCase()
             .replace(/[^a-z0-9]/g, ''); // Remove anything that's not a letter or number
 
-    // Normalise the answers
-    const normalisedUserAnswer = normaliseAnswer(userAnswer);
-    const normalisedCorrectAnswer = normaliseAnswer(correctAnswer);
+    const normalisedUserAnswer = normaliseAnswer(userAnswer.trim());
+    let isCorrect = false;
 
-    // Check if the normalised answers are equal
-    const isCorrect = normalisedUserAnswer === normalisedCorrectAnswer;
+    // For the Cadences topic, use the splitting logic (multiple acceptable answers)
+    if (topicName === 'Cadences') {
+        const correctAlternatives = correctAnswer
+            .split(',')
+            .map(ans => normaliseAnswer(ans.trim()));
+        isCorrect = correctAlternatives.includes(normalisedUserAnswer);
+    } else {
+        // For other topics, compare the entire answer directly
+        isCorrect = normalisedUserAnswer === normaliseAnswer(correctAnswer.trim());
+    }
 
     // Insert the user's answer into the database
     const sqlInsert = "INSERT INTO user_answers (user_answer, is_correct, question_id) VALUES (?, ?, ?)";
