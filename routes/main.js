@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+// Normalisation function: converts to lowercase and removes everything except letters, numbers, and #
+const normaliseAnswer = (answer) =>
+    answer.toLowerCase().replace(/[^a-z0-9#]/g, '');
+
 // Define our data
 var appData = { appName: "In Tune with Music Theory" };
 
@@ -44,7 +48,6 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
                 res.send("No question found for this topic and number.");
             }
 
-            // Render the question page
             res.render('questions.ejs', {
                 currentQuestion: questionResult[0],
                 topicName,
@@ -56,12 +59,6 @@ router.get('/topics/:topic_name/:question_number', (req, res) => {
 
 router.post('/answer-feedback', (req, res) => {
     const { userAnswer, correctAnswer, questionId, questionNumber, topicName } = req.body;
-
-    // Normalisation function: remove non-alphanumeric characters and lowercase the answer
-    const normaliseAnswer = (answer) =>
-        answer
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, ''); // Remove anything that's not a letter or number
 
     const normalisedUserAnswer = normaliseAnswer(userAnswer.trim());
     let isCorrect = false;
@@ -100,7 +97,10 @@ router.get('/search', function(req, res) {
 });
 
 router.get('/search-result', function(req, res) {
-    const keyword = req.query.keyword;
+    let keyword = req.query.keyword;
+
+    keyword = keyword.replace(/#/g, '♯'); // Replace any '#' with the Unicode sharp '♯'
+
     const searchQuery = `%${keyword}%`; // Wrap the search term with '%' for LIKE search
 
     // Search both question and answer columns for the keyword
@@ -116,7 +116,7 @@ router.get('/search-result', function(req, res) {
 
         // Render the search results
         res.render('search-result.ejs', {
-            keyword,
+            keyword: req.query.keyword, // Display the original search term
             results,
         });
     });
